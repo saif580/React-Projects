@@ -33,7 +33,8 @@ function App () {
     <div>
       <Header />
       <InvestmentForm sendData={receivedDataHandler} />
-      <InvestmentDetails yearlyData={yearlyData} />
+      {yearlyData === '' ? 'No data found':
+      <InvestmentDetails yearlyData={yearlyData} />}
     </div>
   )
 }
