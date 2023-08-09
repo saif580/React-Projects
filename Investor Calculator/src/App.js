@@ -8,8 +8,8 @@ function App () {
   const receivedDataHandler = data => {
     setYearlyData(prevValue => {
       let totalInterest=0;
-      let currentSavings = +data.currentSaving // feel free to change the shape of this input object!
-      const yearlyContribution = +data.yearlySaving // as mentioned: feel free to change the shape...
+      let currentSavings = +data.currentSaving 
+      const yearlyContribution = +data.yearlySaving 
       const expectedReturn = +data.expectedInterest
       const duration = +data.investmentDuration
       for (let i = 0; i < duration; i++) {
@@ -33,8 +33,6 @@ function App () {
     <div>
       <Header />
       <InvestmentForm sendData={receivedDataHandler} />
-      {/* Todo: Show below table conditionally (only once result data is available) */}
-      {/* Show fallback text if no data is available */}
       <InvestmentDetails yearlyData={yearlyData} />
     </div>
   )

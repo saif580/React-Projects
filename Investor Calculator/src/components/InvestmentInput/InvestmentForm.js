@@ -11,12 +11,14 @@ const InvestmentForm = props => {
   const [formData, setFormData] = useState(intialState)
 
   const enteredDataHandler = event => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
+    if (value.trim() !== '') {
     setFormData(prevValue => ({
       ...prevValue,
       [name]: value,
       key: +(Math.random() * 1000).toFixed(0)
     }))
+  }
   }
 
   const onResetHandler = event => {
@@ -25,8 +27,9 @@ const InvestmentForm = props => {
 
   const calculateHandler = event => {
     event.preventDefault()
-    props.sendData(formData)
-    setFormData(intialState)
+
+      props.sendData(formData)
+      setFormData(intialState)
   }
 
   return (
@@ -40,6 +43,7 @@ const InvestmentForm = props => {
             name='currentSaving'
             value={formData.currentSaving}
             onChange={enteredDataHandler}
+            required
           />
         </p>
         <p>
@@ -50,6 +54,7 @@ const InvestmentForm = props => {
             name='yearlySaving'
             value={formData.yearlySaving}
             onChange={enteredDataHandler}
+            required
           />
         </p>
       </div>
@@ -64,6 +69,7 @@ const InvestmentForm = props => {
             name='expectedInterest'
             value={formData.expectedInterest}
             onChange={enteredDataHandler}
+            required
           />
         </p>
         <p>
@@ -74,6 +80,7 @@ const InvestmentForm = props => {
             name='investmentDuration'
             value={formData.investmentDuration}
             onChange={enteredDataHandler}
+            required
           />
         </p>
       </div>
