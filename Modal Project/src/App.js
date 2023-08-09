@@ -23,8 +23,13 @@ function App() {
   const submitHandler=event=>{
     event.preventDefault();
     setAllData(preValue=>[...preValue,formData])
-    console.log(allData);
     setFormData(intialData)
+  }
+
+  const deleteHandler=index=>{
+    const updatedFormData=[...allData];
+    updatedFormData.splice(index,1)
+    setAllData(updatedFormData)
   }
 
   return (
@@ -55,7 +60,7 @@ function App() {
       <div className="form-history">
         <ul>
           {allData.map((entry, index) => (
-            <li key={index}>
+            <li key={index} onClick={()=>deleteHandler(index)}>
               Username: {entry.username}, Age: {entry.age}
             </li>
           ))}
