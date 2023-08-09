@@ -20,6 +20,17 @@ const InvestmentDetails = props => {
           <td>TOTAL INTEREST GAINED</td>
           <td>TOTAL INVESTED CAPITAL</td>
         </tr>
+        {props.yearlyData.map((data, index) => {
+          return (
+          <tr key={index}>
+            <td>{data.year}</td>
+            <td>{data.savingsEndOfYear}</td>
+            <td>{data.yearlyInterest}</td>
+            <td>{data.totalInterest}</td>
+            <td>{data.yearlyContribution}</td>
+          </tr>);
+        })}
+
       </tbody>
     </table>
   )
