@@ -19,7 +19,6 @@ function App() {
       }
 
       const data = await response.json();
-      console.log(data);
       const loadedMovies=[];
       for(const key in data){
         loadedMovies.push({
@@ -58,7 +57,6 @@ function App() {
         }
       });
       const data=await response.json();
-      console.log(data);
   }
 
   let content = <p>Found no movies.</p>;
