@@ -1,39 +1,52 @@
-import { useDispatch, useSelector } from 'react-redux';
-import classes from './CartItem.module.css';
-import { addToCartActions } from '../../store/addtocart';
+import { useDispatch, useSelector } from "react-redux";
+import classes from "./CartItem.module.css";
+import { addToCartActions } from "../../store/addtocart";
 
 const CartItem = (props) => {
-  const { title, price } = props.item;
-  const quantities=useSelector(state=>state.addToCart.quantity);
-  const amount=useSelector(state=>state.addToCart.amount)
-  const dispatch=useDispatch();
-  const incrementHandler=()=>{
-    dispatch(addToCartActions.addItem())
-  }
-  const decrementHandler=()=>{
-    dispatch(addToCartActions.removeItem())
-    dispatch(addToCartActions.decreaseAmt(6))
-  }
+  const items = useSelector((state) => state.addToCart.items);
+  const dispatch = useDispatch();
+  const incrementHandler = (itemId) => {
+    dispatch(
+      addToCartActions.addItem({
+        id: itemId,
+      })
+    );
+    for(let i=0;i<items.length;i++){
+      console.log(items[i]);
+    }
+  };
+  const decrementHandler = (itemId) => {
+    dispatch(
+      addToCartActions.removeItem({
+        id: itemId,
+      })
+    );
+    
+  };
 
   return (
-    <li className={classes.item}>
-      <header>
-        <h3>{title}</h3>
-        <div className={classes.price}>
-          ${amount.toFixed(2)}{' '}
-          <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
-        </div>
-      </header>
-      <div className={classes.details}>
-        <div className={classes.quantity}>
-          x <span>{quantities}</span>
-        </div>
-        <div className={classes.actions}>
-          <button onClick={decrementHandler}>-</button>
-          <button onClick={incrementHandler}>+</button>
-        </div>
-      </div>
-    </li>
+    <>
+      {items.map((item) => (
+        <li className={classes.item} key={item.id}>
+          <header>
+            <h3>{item.title}</h3>
+            <div className={classes.price}>
+              ${Number(item.totalAmount).toFixed(2)}{" "}
+              <span className={classes.itemprice}>(${item.price.toFixed(2)}/item)</span>
+            </div>
+          </header>
+          <div className={classes.details}>
+            <div className={classes.quantity}>
+              x <span>{item.quantity}</span>
+            </div>
+            <div className={classes.actions}>
+              <button onClick={() => decrementHandler(item.id)}>-</button>
+              <button onClick={() => incrementHandler(item.id)}>+</button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </>
   );
 };
 

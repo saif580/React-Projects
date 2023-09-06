@@ -8,7 +8,7 @@ const Cart = (props) => {
       <div>
         <h2>Your Shopping Cart</h2>
         <ul>
-          <CartItem item={{ title: "Test Item", price: 6 }} />
+          <CartItem />
         </ul>
       </div>
     </Card>

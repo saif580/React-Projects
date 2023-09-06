@@ -1,15 +1,23 @@
-import { addToCartActions } from '../../store/addtocart';
-import Card from '../UI/Card';
-import classes from './ProductItem.module.css';
-import { useDispatch } from 'react-redux';
+import { addToCartActions } from "../../store/addtocart";
+import Card from "../UI/Card";
+import classes from "./ProductItem.module.css";
+import { useDispatch } from "react-redux";
 
 const ProductItem = (props) => {
-  const { title, price, description } = props;
-  const dispatch=useDispatch();
-  const addToCartHandler=()=>{
-    dispatch(addToCartActions.addItem())
-    dispatch(addToCartActions.increaseAmt(6))
-  }
+  const { id, title, price, description } = props;
+
+  const dispatch = useDispatch();
+  const addToCartHandler = () => {
+    dispatch(
+      addToCartActions.addItem({
+        id,
+        title,
+        price,
+        description,
+        quantity: props.quantity,
+      })
+    );
+  };
 
   return (
     <li className={classes.item}>

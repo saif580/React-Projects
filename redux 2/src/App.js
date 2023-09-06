@@ -4,11 +4,12 @@ import Products from "./components/Shop/Products";
 import { useSelector } from "react-redux";
 
 function App() {
-  const quantity = useSelector((state) => state.addToCart.quantity);
+  const items=useSelector(state=>state.addToCart.items);
+  const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
   const show = useSelector((state) => state.isShown.isShown);
   return (
     <Layout>
-      {show && quantity > 0 && <Cart />}
+      {show && totalQuantity>=1 && <Cart />}
       <Products />
     </Layout>
   );
