@@ -1,15 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const initialStateCartShow={
-    isShown:true
-}
-
 const cartshow=createSlice({
     name:"cartshow",
-    initialState:initialStateCartShow,
+    initialState:{isShown:true,notification:null},
     reducers:{
         showCartModal(state){
             state.isShown=!state.isShown
+        },
+        showNotification(state,action){
+            state.notification={
+                status:action.payload.status,
+                title:action.payload.title,
+                message:action.payload.message
+            }
         }
     }
 });
