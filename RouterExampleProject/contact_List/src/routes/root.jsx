@@ -11,11 +11,11 @@ import { getContacts, createContact } from "../contacts";
 import { useEffect } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export async function loader({request}) {
+export async function loader({ request }) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
-  return { contacts ,q};
+  return { contacts, q };
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -24,22 +24,18 @@ export async function action() {
   return redirect(`/contacts/${contact.id}/edit`);
 }
 
-
 export default function Root() {
-  const { contacts ,q} = useLoaderData();
+  const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
-  const submit=useSubmit();
+  const submit = useSubmit();
 
-  
   const searching =
     navigation.location &&
-    new URLSearchParams(navigation.location.search).has(
-      "q"
-    );
+    new URLSearchParams(navigation.location.search).has("q");
 
-  useEffect(()=>{
-    document.getElementById("q").value=q
-  })
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  });
   return (
     <>
       <div id="sidebar">
@@ -58,9 +54,10 @@ export default function Root() {
                 const isFirstSearch = q == null;
                 submit(event.currentTarget.form, {
                   replace: !isFirstSearch,
-                });              }}
+                });
+              }}
             />
-            <div id="search-spinner" aria-hidden  hidden={!searching} />
+            <div id="search-spinner" aria-hidden hidden={!searching} />
             <div className="sr-only" aria-live="polite"></div>
           </Form>
           <Form method="post">
